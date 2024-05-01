@@ -28,6 +28,7 @@ CHAT: This command sends the message to the chatbot and prints the response.
 Here's an example:
 
 ```llamascript
+IGNORE
 USE llama3
 PROMPT Hello, how are you?
 CHAT
