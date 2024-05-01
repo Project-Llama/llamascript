@@ -1,5 +1,7 @@
 # LlamaScript
 
+[![Black Format](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/format.yml/badge.svg)](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/format.yml)
+
 LlamaScript is a no-code AI chatbot using Ollama.
 
 ## Installation
