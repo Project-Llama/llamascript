@@ -14,7 +14,9 @@ pip install llamascript
 To use LlamaScript, create a llama file (no file extension) with the following commands:
 
 ```llamascript
+IGNORE: Use this before the CHAT command to supress the welcome message.
 USE <model>: This command loads the specified model.
+SYSTEM <message>: This command sets the system prompt.
 PROMPT <message>: This command sets the message to be sent to the chatbot.
 CHAT: This command sends the message to the chatbot and prints the response.
 ```
