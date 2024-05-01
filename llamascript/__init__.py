@@ -19,15 +19,15 @@ class llama:
         else:
             raise ValueError("Invalid model")
 
-    def PROMPT(self, line='', p=''):
-        if p != '':
+    def PROMPT(self, line="", p=""):
+        if p != "":
             self.data = p
         else:
             split_line = line.split(" ", 1)
             self.data = split_line[1] if len(split_line) > 1 else ""
 
-    def SYSTEM(self, line='', p=''):
-        if p != '':
+    def SYSTEM(self, line="", p=""):
+        if p != "":
             self.system = [{"role": "system", "content": p}]
         else:
             split_line = line.split(" ", 1)
@@ -41,9 +41,7 @@ class llama:
                     model=self.model,
                     messages=self.system + [{"role": "user", "content": self.data}],
                 )
-                print(
-                    response["message"]["content"]
-                )
+                print(response["message"]["content"])
                 break
             except Exception as e:
                 logging.error("Error using model: %s", e)
@@ -54,7 +52,7 @@ class llama:
             raise ValueError(
                 "Model does not exist or could not be loaded. Please try again."
             )
-        
+
     def INPUT(self, command):
         if command == "SYSTEM":
             self.SYSTEM(p=input("Enter system prompt: "))
