@@ -1,6 +1,7 @@
 # LlamaScript
 
 [![Black Format](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/format.yml/badge.svg)](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/format.yml)
+[![Upload to PyPi](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/python-publish.yml/badge.svg)](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/python-publish.yml)
 
 LlamaScript is a no-code AI chatbot using Ollama.
 
