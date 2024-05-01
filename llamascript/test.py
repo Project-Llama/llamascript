@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 from __init__ import llama
 
+
 class TestLlama(unittest.TestCase):
     def setUp(self):
         self.llama = llama()
@@ -19,12 +20,12 @@ class TestLlama(unittest.TestCase):
         self.assertEqual(self.llama.system, [{"role": "system", "content": "system1"}])
 
     def test_INPUT_SYSTEM(self):
-        with patch('builtins.input', return_value="system1"):
+        with patch("builtins.input", return_value="system1"):
             self.llama.INPUT("SYSTEM")
         self.assertEqual(self.llama.system, [{"role": "system", "content": "system1"}])
 
     def test_INPUT_PROMPT(self):
-        with patch('builtins.input', return_value="prompt1"):
+        with patch("builtins.input", return_value="prompt1"):
             self.llama.INPUT("PROMPT")
         self.assertEqual(self.llama.data, "prompt1")
 
@@ -33,5 +34,5 @@ class TestLlama(unittest.TestCase):
             self.llama.INPUT("INVALID")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
