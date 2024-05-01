@@ -34,14 +34,20 @@ class llama:
             prompt = split_line[1] if len(split_line) > 1 else ""
             self.system = [{"role": "system", "content": prompt}]
 
-    def CHAT(self):
-        for _ in range(3):  # Try 3 times
+    def CHAT(self, stream: bool = False):
+        for _ in range(3):
             try:
                 response = ollama.chat(
                     model=self.model,
                     messages=self.system + [{"role": "user", "content": self.data}],
+                    stream=stream,
                 )
-                print(response["message"]["content"])
+                if stream:
+                    for message in response:
+                        print(message["message"]["content"], end="")
+                    print()
+                else:
+                    print(response["message"]["content"])
                 break
             except Exception as e:
                 logging.error("Error using model: %s", e)
@@ -80,12 +86,13 @@ class llama:
                     elif command[0] == "PROMPT":
                         self.PROMPT(line=line)
                     elif command[0] == "CHAT":
+                        stream = command[1] == "STREAM" if len(command) > 1 else False
                         if not self.ignore:
                             print(
                                 '=================\nThanks for using llama, a no-code AI chatbot. Please ensure Ollama (https://ollama.com) is running. To get started, type "USE" followed by the model you want to use. Then, type "PROMPT" followed by the prompt you want to use. Finally, type "CHAT" to chat with the AI. To run a script, type "llamascript" to run your script. To ignore this message, add "IGNORE" to the beginning of your llama file.\n================='
                             )
                             self.ignore = True
-                        self.CHAT()
+                        self.CHAT(stream)
                     else:
                         raise ValueError("Invalid command")
         except FileNotFoundError:
