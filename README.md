@@ -6,7 +6,7 @@
 [![Tests](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/test.yml/badge.svg)](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/test.yml)
 
 [![VS Code Extension Downloads](https://img.shields.io/visual-studio-marketplace/d/WolfTheDev.llamascript?label=VS-Code%20Downloads)](https://marketplace.visualstudio.com/items?itemName=WolfTheDev.llamascript)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/d/WolfTheDeveloper/llamascript?label=Commits)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/dd/WolfTheDeveloper/llamascript?label=Commits)
 ![GitHub License](https://img.shields.io/github/license/WolfTheDeveloper/llamascript?label=License)
 
 LlamaScript is a no-code AI chatbot using Ollama.
