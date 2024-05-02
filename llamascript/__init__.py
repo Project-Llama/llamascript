@@ -99,14 +99,16 @@ class llama:
             logging.error("File %s not found.", filename)
             print(f"File {filename} not found.")
 
+import argparse
 
 def run():
+    parser = argparse.ArgumentParser(description='Run llama script.')
+    parser.add_argument('file_name', type=str, help='The name of the file to run')
+
+    args = parser.parse_args()
+
     try:
         l = llama()
-        asyncio.run(l.read("llama"))
+        asyncio.run(l.read(args.file_name))
     except KeyboardInterrupt:
         pass
-
-
-if __name__ == "__main__":
-    run()
