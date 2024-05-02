@@ -58,13 +58,13 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+          git config user.email "wolfthedev@gmail.com"
+          git config user.name "WolfTheDeveloper"
 
       - name: Commit and push changes
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+          git config user.email "wolfthedev@gmail.com"
+          git config user.name "WolfTheDeveloper"
           git add CONTRIBUTORS.md
           git commit -m "Update CONTRIBUTORS.md with new contributors"
           git push
