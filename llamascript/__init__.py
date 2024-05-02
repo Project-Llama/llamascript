@@ -34,14 +34,20 @@ class llama:
             prompt = split_line[1] if len(split_line) > 1 else ""
             self.system = [{"role": "system", "content": prompt}]
 
-    def CHAT(self):
-        for _ in range(3):  # Try 3 times
+    def CHAT(self, stream: bool = False):
+        for _ in range(3):
             try:
                 response = ollama.chat(
                     model=self.model,
                     messages=self.system + [{"role": "user", "content": self.data}],
+                    stream=stream,
                 )
-                print(response["message"]["content"])
+                if stream:
+                    for message in response:
+                        print(message["message"]["content"], end="")
+                    print()
+                else:
+                    print(response["message"]["content"])
                 break
             except Exception as e:
                 logging.error("Error using model: %s", e)
@@ -79,27 +85,30 @@ class llama:
                         self.SYSTEM(line=line)
                     elif command[0] == "PROMPT":
                         self.PROMPT(line=line)
-                    elif command[0] == "CHAT":
+                    elif command[0] == "CHAT" and command[1] == "STREAM":
+                        stream = command[1] == True if len(command) > 1 else False
                         if not self.ignore:
                             print(
                                 '=================\nThanks for using llama, a no-code AI chatbot. Please ensure Ollama (https://ollama.com) is running. To get started, type "USE" followed by the model you want to use. Then, type "PROMPT" followed by the prompt you want to use. Finally, type "CHAT" to chat with the AI. To run a script, type "llamascript" to run your script. To ignore this message, add "IGNORE" to the beginning of your llama file.\n================='
                             )
                             self.ignore = True
-                        self.CHAT()
+                        self.CHAT(stream=stream)
                     else:
                         raise ValueError("Invalid command")
         except FileNotFoundError:
             logging.error("File %s not found.", filename)
             print(f"File {filename} not found.")
 
+import argparse
 
 def run():
+    parser = argparse.ArgumentParser(description='Run llama script.')
+    parser.add_argument('file_name', type=str, help='The name of the file to run')
+
+    args = parser.parse_args()
+
     try:
         l = llama()
-        asyncio.run(l.read("llama"))
+        asyncio.run(l.read(args.file_name))
     except KeyboardInterrupt:
         pass
-
-
-if __name__ == "__main__":
-    run()
