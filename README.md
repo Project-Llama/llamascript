@@ -41,5 +41,7 @@ You can then run LlamaScript with the following command:
 llamascript
 ```
 
+LlamaScript usually has a file extension of `.llama`, but if it is ran as a main script, it is usually `llama` (no file extension).
+
 ## License
 LlamaScript is licensed under the Apache 2.0 License.
