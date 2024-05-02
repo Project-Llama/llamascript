@@ -58,8 +58,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
           git add CONTRIBUTORS.md
           git commit -m "Update CONTRIBUTORS.md with new contributors"
           git push
