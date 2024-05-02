@@ -5,6 +5,8 @@
 [![CodeQL](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/github-code-scanning/codeql)
 [![Tests](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/test.yml/badge.svg)](https://github.com/WolfTheDeveloper/llamascript/actions/workflows/test.yml)
 
+[![VS Code Extension Downloads](https://img.shields.io/visual-studio-marketplace/d/WolfTheDev.llamascript?label=Downloads)](https://marketplace.visualstudio.com/items?itemName=WolfTheDev.llamascript)
+
 LlamaScript is a no-code AI chatbot using Ollama.
 
 ## Installation
