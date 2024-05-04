@@ -1,0 +1,3 @@
+USE llama3
+PROMPT hello
+CHAT

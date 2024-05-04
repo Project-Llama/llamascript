@@ -1,5 +1,0 @@
-IGNORE
-USE llama3
-SYSTEM always respond backwards
-PROMPT INPUT
-CHAT STREAM
