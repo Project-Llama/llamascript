@@ -85,8 +85,11 @@ class llama:
                         self.SYSTEM(line=line)
                     elif command[0] == "PROMPT":
                         self.PROMPT(line=line)
-                    elif command[0] == "CHAT" and command[1] == "STREAM":
-                        stream = command[1] == True if len(command) > 1 else False
+                    elif command[0] == "CHAT":
+                        if len(command) > 1 and command[1] == "STREAM":
+                            stream = command[1] == True
+                        else:
+                            stream = False
                         if not self.ignore:
                             print(
                                 '=================\nThanks for using llama, a no-code AI chatbot. Please ensure Ollama (https://ollama.com) is running. To get started, type "USE" followed by the model you want to use. Then, type "PROMPT" followed by the prompt you want to use. Finally, type "CHAT" to chat with the AI. To run a script, type "llamascript" to run your script. To ignore this message, add "IGNORE" to the beginning of your llama file.\n================='
