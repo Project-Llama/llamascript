@@ -41,6 +41,8 @@ PROMPT Hello, how are you?
 CHAT
 ```
 
+***Note:*** ***For more examples see [here.](examples/)***
+
 You can then run LlamaScript with the following command:
 
 ```bash
