@@ -1,6 +1,9 @@
 import asyncio
 import ollama
 import logging
+import sys
+import subprocess
+import os
 
 # Set up logging
 logging.basicConfig(level=logging.WARNING)
@@ -66,6 +69,29 @@ class llama:
             self.PROMPT(p=input("Enter prompt: "))
         else:
             raise ValueError("Invalid command for INPUT")
+    
+    def CREATE_MODEL(self, filename, parameters, model_name):
+        try:
+            with open(filename, 'w') as file:
+                file.write(f'FROM {parameters["model"]}\nPARAMETER temperature {parameters["temperature"]}\nSYSTEM """\n{parameters["system_message"]}\n"""\n')
+            print(f'Modelfile created.')
+            command = ["ollama", "create", model_name, "-f", "./Modelfile"]
+            process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=subprocess.CREATE_NO_WINDOW)
+            stdout, stderr = process.communicate()
+            print('Model created.')
+
+            if process.returncode != 0:
+                if stderr is not None:
+                    print(f"Error executing command: {stderr.decode()}")
+                else:
+                    if stdout is not None:
+                        print(stdout.decode())
+            print('Removing Modelfile...')
+            os.remove(filename)
+
+        except Exception as e:
+            logging.error("Error creating model file: %s", e)
+            print(f"Error creating model file {filename}.")
 
     async def read(self, filename):
         try:
@@ -85,6 +111,18 @@ class llama:
                         self.SYSTEM(line=line)
                     elif command[0] == "PROMPT":
                         self.PROMPT(line=line)
+                    elif command[0] == "SAVE":
+                        if len(command) < 2:
+                            logging.error("No filename provided")
+                            print("No filename provided")
+                            sys.exit(1)
+                        model_name = command[1]
+                        parameters = {
+                            "model": self.model,
+                            "temperature": command[2] if len(command) > 2 else 0.7,
+                            "system_message": self.system[0]["content"]
+                        }
+                        self.CREATE_MODEL("Modelfile", parameters, model_name)
                     elif command[0] == "CHAT":
                         if len(command) > 1 and command[1] == "STREAM":
                             stream = command[1] == True
@@ -112,8 +150,16 @@ def run():
 
     args = parser.parse_args()
 
+    if not (args.file_name.endswith(".llama") or args.filename == "llama"):
+        logging.error("Invalid file type. Please provide a .llama or llama file.")
+        print("Invalid file type. Please provide a .llama or llama file.")
+        sys.exit(1)
+
     try:
         l = llama()
         asyncio.run(l.read(args.file_name))
     except KeyboardInterrupt:
         pass
+
+if __name__ == "__main__":
+    run()
