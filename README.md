@@ -14,7 +14,11 @@
 LlamaScript is a no-code AI chatbot using Ollama.
 
 ## Table of Contents
-- [Installation](#installation)
+- [LlamaScript](#llamascript
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [Roadmap](#roadmap)
 
 ## Installation
 
@@ -56,3 +60,9 @@ LlamaScript usually has a file extension of `.llama`, but if it is ran as a main
 
 ## License
 LlamaScript is licensed under the Apache 2.0 License.
+
+## Roadmap
+Things to come in the future:
+
+- An `API` command to serve on Flask
+
