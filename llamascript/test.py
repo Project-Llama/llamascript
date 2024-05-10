@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from llamascript import llama
+from lang import llama
 
 
 class TestLlama(unittest.TestCase):
