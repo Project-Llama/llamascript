@@ -1,5 +1,6 @@
 from lang import llama
 
+
 class LlamaScriptRunner:
     def __init__(self):
         self.llama = llama()
