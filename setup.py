@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="llamascript",
-    version="0.4.0",
+    version="0.5.0",
     author="WolfTheDev",
     author_email="wolfthedev@gmail.com",
     description="No-code AI chatbot using Ollama.",
@@ -19,7 +19,7 @@ setuptools.setup(
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [
-            "llamascript=llamascript:run",
+            "llamascript=llamascript.lang:run",
         ],
     },
 )
