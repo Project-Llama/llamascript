@@ -13,6 +13,9 @@
 
 LlamaScript is a no-code AI chatbot using Ollama.
 
+## Table of Contents
+- [Installation](Installation)
+
 ## Installation
 
 You can install LlamaScript using pip:
