@@ -65,4 +65,5 @@ LlamaScript is licensed under the Apache 2.0 License.
 Things to come in the future:
 
 - An `API` command to serve on Flask
+- Plugins/Extensions handling (Help Wanted)
 
