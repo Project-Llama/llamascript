@@ -69,16 +69,23 @@ class llama:
             self.PROMPT(p=input("Enter prompt: "))
         else:
             raise ValueError("Invalid command for INPUT")
-    
+
     def CREATE_MODEL(self, filename, parameters, model_name):
         try:
-            with open(filename, 'w') as file:
-                file.write(f'FROM {parameters["model"]}\nPARAMETER temperature {parameters["temperature"]}\nSYSTEM """\n{parameters["system_message"]}\n"""\n')
-            print(f'Modelfile created.')
+            with open(filename, "w") as file:
+                file.write(
+                    f'FROM {parameters["model"]}\nPARAMETER temperature {parameters["temperature"]}\nSYSTEM """\n{parameters["system_message"]}\n"""\n'
+                )
+            print(f"Modelfile created.")
             command = ["ollama", "create", model_name, "-f", "./Modelfile"]
-            process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=subprocess.CREATE_NO_WINDOW)
+            process = subprocess.Popen(
+                command,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                creationflags=subprocess.CREATE_NO_WINDOW,
+            )
             stdout, stderr = process.communicate()
-            print('Model created.')
+            print("Model created.")
 
             if process.returncode != 0:
                 if stderr is not None:
@@ -86,7 +93,7 @@ class llama:
                 else:
                     if stdout is not None:
                         print(stdout.decode())
-            print('Removing Modelfile...')
+            print("Removing Modelfile...")
             os.remove(filename)
 
         except Exception as e:
@@ -120,7 +127,7 @@ class llama:
                         parameters = {
                             "model": self.model,
                             "temperature": command[2] if len(command) > 2 else 0.7,
-                            "system_message": self.system[0]["content"]
+                            "system_message": self.system[0]["content"],
                         }
                         self.CREATE_MODEL("Modelfile", parameters, model_name)
                     elif command[0] == "CHAT":
@@ -160,6 +167,7 @@ def run():
         asyncio.run(l.read(args.file_name))
     except KeyboardInterrupt:
         pass
+
 
 if __name__ == "__main__":
     run()
