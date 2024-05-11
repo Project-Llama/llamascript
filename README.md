@@ -19,6 +19,7 @@ LlamaScript is a no-code AI chatbot using Ollama.
   - [Usage](#usage)
   - [License](#license)
   - [Roadmap](#roadmap)
+  - [Examples](examples/)
 
 ## Installation
 
