@@ -1,3 +1,7 @@
+<div style="border-radius: 20px;" align="center">
+  <img width="128" height="128" src="https://github.com/Project-Llama/.github/blob/main/profile/IMG_1443.png">
+</div>
+
 # LlamaScript
 
 [Medium Post](https://medium.com/@wolfthedev/llamascript-simple-ai-builder-74442dc9b090)
