@@ -52,7 +52,7 @@ PROMPT Hello, how are you?
 CHAT
 ```
 
-> [NOTE] For more examples see [here.](examples/)
+>[NOTE] For more examples see [here.](examples/)
 
 You can then run LlamaScript with the following command:
 
