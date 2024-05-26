@@ -1,5 +1,5 @@
 name: Format
-on: [pull_request, push]
+on: [push]
 jobs:
   linter_name:
     name: runner / black
