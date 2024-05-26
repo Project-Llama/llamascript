@@ -9,9 +9,11 @@ import os
 
 dbg = False
 
+
 def debug(message):
     if dbg:
         print(message)
+
 
 # Set up logging
 logging.basicConfig(level=logging.WARNING)
@@ -150,7 +152,7 @@ class llama:
                         }
                         self.CREATE_MODEL("Modelfile", parameters, model_name)
                     elif command[0] == "CHAT":
-                        if len(command) > 1 and command[1] == "STREAM":\
+                        if len(command) > 1 and command[1] == "STREAM":
                             self.CHAT(stream=True)
                         else:
                             self.CHAT()
