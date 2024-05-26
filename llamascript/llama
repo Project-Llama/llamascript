@@ -1,0 +1,3 @@
+USE llama3
+PROMPT why is the sky blue?
+CHAT STREAM
