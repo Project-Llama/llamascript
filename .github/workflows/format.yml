@@ -4,6 +4,7 @@ jobs:
   linter_name:
     name: runner / black
     runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
     steps:
       - uses: actions/checkout@v4
       - name: Check files using the black formatter
