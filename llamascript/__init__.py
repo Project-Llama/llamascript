@@ -1,4 +1,4 @@
-__version__ = "0.6.1"
+__version__ = "0.6.3"
 
 import asyncio
 import ollama
@@ -6,6 +6,12 @@ import logging
 import sys
 import subprocess
 import os
+
+dbg = False
+
+def debug(message):
+    if dbg:
+        print(message)
 
 # Set up logging
 logging.basicConfig(level=logging.WARNING)
@@ -41,11 +47,13 @@ class llama:
     def CHAT(self, stream: bool = False):
         for _ in range(3):
             try:
+                debug("Attempting to chat with model...")
                 response = ollama.chat(
                     model=self.model,
                     messages=self.system + [{"role": "user", "content": self.data}],
                     stream=stream,
                 )
+                debug("Chat successful.")
                 if stream:
                     for message in response:
                         print(message["message"]["content"], end="")
@@ -100,10 +108,7 @@ class llama:
         except Exception as e:
             logging.error("Error creating model file: %s", e)
             print(f"Error creating model file {filename}.")
-        
-    def REPEAT(self, command, repeat_count):
-        for _ in range(repeat_count):
-            self.execute_command(command)
+            sys.exit(1)
 
     def execute_command(self, command):
         if command.startswith("PROMPT INPUT"):
@@ -124,17 +129,7 @@ class llama:
                         i += 1
                         continue
                     command = line.split(" ")
-                    if command[0] == "REPEAT":
-                        repeat_count = int(command[1]) if len(command) > 1 else 1
-                        repeat_commands = []
-                        i += 1
-                        while i < len(lines) and not lines[i].strip().startswith("ENDREPEAT"):
-                            repeat_commands.append(lines[i].strip())
-                            i += 1
-                        for _ in range(repeat_count):
-                            for repeat_command in repeat_commands:
-                                self.execute_command(repeat_command)
-                    elif command[0] == "USE":
+                    if command[0] == "USE":
                         self.USE(line)
                     elif len(command) > 1 and command[1] == "INPUT":
                         self.INPUT(command[0])
@@ -155,17 +150,13 @@ class llama:
                         }
                         self.CREATE_MODEL("Modelfile", parameters, model_name)
                     elif command[0] == "CHAT":
-                        if len(command) > 1 and command[1] == "STREAM":
-                            stream = command[1] == True
+                        if len(command) > 1 and command[1] == "STREAM":\
+                            self.CHAT(stream=True)
                         else:
-                            stream = False
-                        self.CHAT(stream=stream)
-                    elif command[0] == "REPEAT":
-                        repeat_count = int(command[1]) if len(command) > 1 else 1
-                        repeat_command = " ".join(command[2:])
-                        self.REPEAT(repeat_command, repeat_count)
+                            self.CHAT()
                     else:
                         raise ValueError("Invalid command")
+                    i += 1
         except FileNotFoundError:
             logging.error("File %s not found.", filename)
             print(f"File {filename} not found.")
@@ -177,8 +168,19 @@ import argparse
 def run():
     parser = argparse.ArgumentParser(description="Run llama script.")
     parser.add_argument("file_name", type=str, help="The name of the file to run")
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version=f"LlamaScript version {__version__}",
+        help="Display version information",
+    )
 
     args = parser.parse_args()
+
+    if args.version:
+        print(f"llamascript version {__version__}")
+        sys.exit(0)
 
     if not (args.file_name.endswith(".llama") or args.file_name == "llama"):
         logging.error("Invalid file type. Please provide a .llama or llama file.")
