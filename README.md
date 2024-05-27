@@ -14,7 +14,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Project-Llama/llamascript?label=Commits)
 ![GitHub License](https://img.shields.io/github/license/Project-Llama/llamascript?label=License)
 
-![Discord](https://img.shields.io/badge/Join-Logo?style=flat&logo=discord&label=Discord&color=%235865F2&link=http%3A%2F%2Fdiscord.com%2Finvite%2FRJ9ZDPM2Fx)
+[![Discord](https://img.shields.io/badge/Join-Logo?style=flat&logo=discord&label=Discord&color=%235865F2)](http://discord.com/invite/RJ9ZDPM2Fx)
 
 LlamaScript is a no-code AI chatbot using Ollama.
 
