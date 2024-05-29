@@ -1,4 +1,4 @@
-__version__ = "0.6.3"
+__version__ = "0.6.4"
 
 import asyncio
 import ollama
@@ -179,10 +179,6 @@ def run():
     )
 
     args = parser.parse_args()
-
-    if args.version:
-        print(f"llamascript version {__version__}")
-        sys.exit(0)
 
     if not (args.file_name.endswith(".llama") or args.file_name == "llama"):
         logging.error("Invalid file type. Please provide a .llama or llama file.")
