@@ -1,4 +1,4 @@
-__version__ = "0.6.4"
+__version__ = "0.6.5"
 
 import asyncio
 import ollama
@@ -6,6 +6,7 @@ import logging
 import sys
 import subprocess
 import os
+import platform
 
 dbg = False
 
@@ -89,12 +90,19 @@ class llama:
                 )
             print(f"Modelfile created.")
             command = ["ollama", "create", model_name, "-f", "./Modelfile"]
-            process = subprocess.Popen(
-                command,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                creationflags=subprocess.CREATE_NO_WINDOW,
-            )
+            if platform.system() == "Windows":
+                process = subprocess.Popen(
+                    command,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    creationflags=subprocess.CREATE_NO_WINDOW,
+                )
+            else:
+                process = subprocess.Popen(
+                    command,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
             stdout, stderr = process.communicate()
             print("Model created.")
 
