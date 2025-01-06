@@ -1,2 +1,2 @@
-ollama
-asyncio
+ollama==0.4.5
+colorama==0.4.6

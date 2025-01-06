@@ -1,0 +1,3 @@
+use("llama3")
+system("You will respond in pig latin only.")
+save("piglatin", 0.7)

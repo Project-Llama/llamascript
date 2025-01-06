@@ -3,9 +3,6 @@
 </div>
 
 # LlamaScript
-
-[Medium Post](https://medium.com/@wolfthedev/llamascript-simple-ai-builder-74442dc9b090)
-
 [![Black Format](https://github.com/Project-Llama/llamascript/actions/workflows/format.yml/badge.svg)](https://github.com/Project-Llama/llamascript/actions/workflows/format.yml)
 [![Upload to PyPi](https://github.com/Project-Llama/llamascript/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Project-Llama/llamascript/actions/workflows/python-publish.yml)
 [![CodeQL](https://github.com/Project-Llama/llamascript/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Project-Llama/llamascript/actions/workflows/github-code-scanning/codeql)
@@ -14,8 +11,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Project-Llama/llamascript?label=Commits)
 ![GitHub License](https://img.shields.io/github/license/Project-Llama/llamascript?label=License)
 
-[![Discord](https://img.shields.io/badge/Join-Logo?style=flat&logo=discord&label=Discord&color=%235865F2)](http://discord.com/invite/RJ9ZDPM2Fx)
-
 LlamaScript is a no-code AI chatbot using Ollama.
 
 ## Table of Contents
@@ -23,8 +18,7 @@ LlamaScript is a no-code AI chatbot using Ollama.
   - [Installation](#installation)
   - [Usage](#usage)
   - [License](#license)
-  - [Roadmap](#roadmap)
-  - [Examples](examples/)
+- [Examples](examples/)
 
 ## Installation
 
@@ -35,42 +29,29 @@ pip install llamascript
 ```
 
 ## Usage
-To use LlamaScript, create a llama file (no file extension) with the following commands:
-
+To use LlamaScript, create a `.llama` file and write your script. Here are the commands you can use:
 ```llamascript
-IGNORE: Use this before the CHAT command to supress the welcome message.
-USE <model>: This command loads the specified model.
-SYSTEM <message>: This command sets the system prompt.
-PROMPT <message>: This command sets the message to be sent to the chatbot.
-CHAT: This command sends the message to the chatbot and prints the response.
+use(...) # Specify the model to use
+prompt(...) # Prompt the user for input
+system(...) # System message for the AI
+chat(...) # Chat with the user
+save(...) # Save the model
 ```
 
 Here's an example:
-
 ```llamascript
-IGNORE
-USE llama3
-PROMPT Hello, how are you?
-CHAT
+use("llama3")
+prompt("Why is the sky blue?")
+chat()
 ```
 
 > [!NOTE]\
 > For more examples see [here.](examples/)
 
 You can then run LlamaScript with the following command:
-
 ```bash
-llamascript
+llamascript myscript.llama
 ```
 
-LlamaScript usually has a file extension of `.llama`, but if it is ran as a main script, it is usually `llama` (no file extension).
-
 ## License
-LlamaScript is licensed under the Apache 2.0 License.
-
-## Roadmap
-Things to come in the future:
-
-- An `API` command to serve on Flask
-- Plugins/Extensions handling (Help Wanted)
-
+LlamaScript is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for more information.

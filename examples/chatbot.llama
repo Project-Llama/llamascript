@@ -1,0 +1,3 @@
+use("llama3")
+prompt("Why is the sky blue?")
+chat()
