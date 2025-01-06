@@ -14,18 +14,29 @@ import colorama
 colorama.init()
 dbg = False
 
+
 def debug(message):
     if dbg:
-        print(f"{colorama.Fore.CYAN}{colorama.Style.BRIGHT}[DEBUG]{colorama.Style.RESET_ALL} {message}")
+        print(
+            f"{colorama.Fore.CYAN}{colorama.Style.BRIGHT}[DEBUG]{colorama.Style.RESET_ALL} {message}"
+        )
+
 
 def error(message):
-    print(f"{colorama.Fore.RED}{colorama.Style.BRIGHT}[ERROR]{colorama.Style.RESET_ALL} {message}")
+    print(
+        f"{colorama.Fore.RED}{colorama.Style.BRIGHT}[ERROR]{colorama.Style.RESET_ALL} {message}"
+    )
+
 
 def warning(message):
-    print(f"{colorama.Fore.YELLOW}{colorama.Style.BRIGHT}[WARNING]{colorama.Style.RESET_ALL} {message}")
+    print(
+        f"{colorama.Fore.YELLOW}{colorama.Style.BRIGHT}[WARNING]{colorama.Style.RESET_ALL} {message}"
+    )
+
 
 # Set up logging
 logging.basicConfig(level=logging.WARNING)
+
 
 class Lexer:
     def __init__(self, input_text):
@@ -34,16 +45,16 @@ class Lexer:
 
     def tokenize(self, text):
         token_specification = [
-            ("ATTRIBUTE", r"#\[(.*?)\]"),         # Attributes e.g., #[stream(true)]
-            ("NUMBER", r"\d+(\.\d*)?"),           # Integer or decimal number
-            ("STRING", r"\".*?\""),               # String literals
-            ("ID", r"[A-Za-z_][A-Za-z0-9_]*"),    # Identifiers
-            ("LPAREN", r"\("),                    # Left parenthesis
-            ("RPAREN", r"\)"),                    # Right parenthesis
-            ("COMMA", r","),                      # Comma
-            ("NEWLINE", r"\n"),                   # Line endings
-            ("SKIP", r"[ \t]+"),                  # Skip over spaces and tabs
-            ("MISMATCH", r"."),                    # Any other character
+            ("ATTRIBUTE", r"#\[(.*?)\]"),  # Attributes e.g., #[stream(true)]
+            ("NUMBER", r"\d+(\.\d*)?"),  # Integer or decimal number
+            ("STRING", r"\".*?\""),  # String literals
+            ("ID", r"[A-Za-z_][A-Za-z0-9_]*"),  # Identifiers
+            ("LPAREN", r"\("),  # Left parenthesis
+            ("RPAREN", r"\)"),  # Right parenthesis
+            ("COMMA", r","),  # Comma
+            ("NEWLINE", r"\n"),  # Line endings
+            ("SKIP", r"[ \t]+"),  # Skip over spaces and tabs
+            ("MISMATCH", r"."),  # Any other character
         ]
         tok_regex = "|".join("(?P<%s>%s)" % pair for pair in token_specification)
         for mo in re.finditer(tok_regex, text):
@@ -62,6 +73,7 @@ class Lexer:
                 error(f"Invalid character: {value}")
                 sys.exit(1)
 
+
 class Parser:
     def __init__(self, tokens):
         self.tokens = tokens
@@ -73,7 +85,9 @@ class Parser:
         while self.current < len(self.tokens):
             token = self.tokens[self.current]
             if token[0] == "ATTRIBUTE":
-                current_attributes = self.parse_attribute(token[1][2:-1].strip())  # Remove #[ and ]
+                current_attributes = self.parse_attribute(
+                    token[1][2:-1].strip()
+                )  # Remove #[ and ]
                 self.current += 1  # Skip ATTRIBUTE
             elif token[0] == "ID":
                 ast.append(self.statement(current_attributes))
@@ -103,7 +117,9 @@ class Parser:
 
     def arguments(self):
         args = []
-        while self.current < len(self.tokens) and self.tokens[self.current][0] != "RPAREN":
+        while (
+            self.current < len(self.tokens) and self.tokens[self.current][0] != "RPAREN"
+        ):
             token = self.tokens[self.current]
             if token[0] in {"STRING", "NUMBER"}:
                 args.append(token[1])
@@ -116,7 +132,7 @@ class Parser:
         return args
 
     def parse_attribute(self, attr_str):
-        match = re.match(r'(\w+)\((.+)\)', attr_str)
+        match = re.match(r"(\w+)\((.+)\)", attr_str)
         if match:
             attr_name = match.group(1).lower()
             attr_value = match.group(2).strip('"').strip("'")
@@ -128,6 +144,7 @@ class Parser:
         else:
             error(f"Invalid attribute: {attr_str}")
             sys.exit(1)
+
 
 class Interpreter:
     def __init__(self, ast, llama_instance):
@@ -146,15 +163,20 @@ class Interpreter:
             elif command == "system":
                 self.llama.system_command(args[0], attributes)
             elif command == "save":
-                self.llama.create_model(args[0], {
-                    "model": self.llama.model,
-                    "temperature": args[1],
-                    "system_message": self.llama.system[0]["content"],
-                }, attributes)
+                self.llama.create_model(
+                    args[0],
+                    {
+                        "model": self.llama.model,
+                        "temperature": args[1],
+                        "system_message": self.llama.system[0]["content"],
+                    },
+                    attributes,
+                )
             elif command == "chat":
                 self.llama.chat(attributes)
             else:
                 raise ValueError(f"Unknown command: {command}")
+
 
 class Llama:
     def __init__(self):
@@ -187,7 +209,9 @@ class Llama:
                 )
                 debug("Chat successful.")
                 if stream:
-                    warning("Streaming is a work in progress. Please wait for the final response.")
+                    warning(
+                        "Streaming is a work in progress. Please wait for the final response."
+                    )
                     for message in response:
                         print(message["message"]["content"], end="")
                     print()
@@ -253,6 +277,7 @@ class Llama:
             logging.error("File %s not found.", filename)
             error(f"File {filename} not found.")
 
+
 def run():
     parser = argparse.ArgumentParser(description="Run llama script.")
     parser.add_argument("file_name", type=str, help="The name of the file to run")
@@ -286,6 +311,7 @@ def run():
         l.read(args.file_name)
     except KeyboardInterrupt:
         pass
+
 
 if __name__ == "__main__":
     run()
