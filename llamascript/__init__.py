@@ -60,7 +60,10 @@ class Lexer:
             ("NEWLINE", r"\n"),  # Line endings
             ("SKIP", r"[ \t]+"),  # Skip over spaces and tabs
             ("SLC", r"//.*"),  # Single-line comment e.g., // This is a comment
-            ("MLC", r"/\*(.|\n)*?\*/"),  # Multi-line comment e.g., /* This is a comment */
+            (
+                "MLC",
+                r"/\*(.|\n)*?\*/",
+            ),  # Multi-line comment e.g., /* This is a comment */
             ("MISMATCH", r"."),  # Any other character
         ]
         tok_regex = "|".join("(?P<%s>%s)" % pair for pair in token_specification)
