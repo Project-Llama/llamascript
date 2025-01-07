@@ -18,7 +18,7 @@ LlamaScript is a no-code AI chatbot using Ollama.
   - [Installation](#installation)
   - [Usage](#usage)
   - [License](#license)
-- [Examples](examples/)
+- [Examples](https://github.com/Project-Llama/llamascript/blob/main/examples/)
 
 ## Installation
 
@@ -29,13 +29,13 @@ pip install llamascript
 ```
 
 ## Usage
-To use LlamaScript, create a `.llama` file and write your script. Here are the commands you can use:
+To use LlamaScript, create a `.llama` file and write your script. Here are a few functions you can use:
 ```llamascript
-use(...) # Specify the model to use
-prompt(...) # Prompt the user for input
-system(...) # System message for the AI
-chat(...) # Chat with the user
-save(...) # Save the model
+use(...)    // Specify the model to use
+prompt(...) // Prompt the user for input
+system(...) // System message for the AI
+chat(...)   // Chat with the user
+save(...)   // Save the model
 ```
 
 Here's an example:
@@ -46,7 +46,7 @@ chat()
 ```
 
 > [!NOTE]\
-> For more examples see [here.](examples/)
+> For more examples see [here.](https://github.com/Project-Llama/llamascript/blob/main/examples/)
 
 You can then run LlamaScript with the following command:
 ```bash
@@ -54,4 +54,4 @@ llamascript myscript.llama
 ```
 
 ## License
-LlamaScript is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for more information.
+LlamaScript is licensed under the Apache 2.0 License. See [LICENSE](https://github.com/Project-Llama/llamascript/blob/main/LICENSE) for more information.

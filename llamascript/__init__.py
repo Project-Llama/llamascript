@@ -50,21 +50,18 @@ class Lexer:
 
     def tokenize(self, text):
         token_specification = [
-            ("ATTRIBUTE", r"#\[(.*?)\]"),  # Attributes e.g., #[stream(true)]
-            ("NUMBER", r"\d+(\.\d*)?"),  # Integer or decimal number
-            ("STRING", r"\".*?\""),  # String literals
-            ("ID", r"[A-Za-z_][A-Za-z0-9_]*"),  # Identifiers
-            ("LPAREN", r"\("),  # Left parenthesis
-            ("RPAREN", r"\)"),  # Right parenthesis
-            ("COMMA", r","),  # Comma
-            ("NEWLINE", r"\n"),  # Line endings
-            ("SKIP", r"[ \t]+"),  # Skip over spaces and tabs
-            ("SLC", r"//.*"),  # Single-line comment e.g., // This is a comment
-            (
-                "MLC",
-                r"/\*(.|\n)*?\*/",
-            ),  # Multi-line comment e.g., /* This is a comment */
-            ("MISMATCH", r"."),  # Any other character
+            ("ATTRIBUTE", r"#\[(.*?)\]"),
+            ("NUMBER", r"\d+(\.\d*)?"),
+            ("STRING", r"\".*?\""),
+            ("ID", r"[A-Za-z_][A-Za-z0-9_]*"),
+            ("LPAREN", r"\("),
+            ("RPAREN", r"\)"),
+            ("COMMA", r","),
+            ("NEWLINE", r"\n"),
+            ("SKIP", r"[ \t]+"),
+            ("SLC", r"//.*"),
+            ("MLC", r"/\*(.|\n)*?\*/"),
+            ("MISMATCH", r"."),
         ]
         tok_regex = "|".join("(?P<%s>%s)" % pair for pair in token_specification)
         for mo in re.finditer(tok_regex, text):
