@@ -1,3 +1,9 @@
-use("llama3")
-prompt("Why is the sky blue?")
+use("piglatin") // Load the Piglatin module
+prompt("Why is the sky blue?") /* Ask a question */
+
+// The chatbot will respond in pig latin
 chat()
+
+/*
+    Done! The chatbot will respond in pig latin.
+*/

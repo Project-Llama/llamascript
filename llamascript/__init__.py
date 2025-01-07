@@ -1,6 +1,5 @@
 __version__ = "1.0.0"
 
-import asyncio
 import ollama
 import logging
 import sys
@@ -34,6 +33,12 @@ def warning(message):
     )
 
 
+def info(message):
+    print(
+        f"{colorama.Fore.GREEN}{colorama.Style.BRIGHT}[INFO]{colorama.Style.RESET_ALL} {message}"
+    )
+
+
 # Set up logging
 logging.basicConfig(level=logging.WARNING)
 
@@ -54,6 +59,8 @@ class Lexer:
             ("COMMA", r","),  # Comma
             ("NEWLINE", r"\n"),  # Line endings
             ("SKIP", r"[ \t]+"),  # Skip over spaces and tabs
+            ("SLC", r"//.*"),  # Single-line comment e.g., // This is a comment
+            ("MLC", r"/\*(.|\n)*?\*/"),  # Multi-line comment e.g., /* This is a comment */
             ("MISMATCH", r"."),  # Any other character
         ]
         tok_regex = "|".join("(?P<%s>%s)" % pair for pair in token_specification)
@@ -68,6 +75,8 @@ class Lexer:
             elif kind == "NEWLINE":
                 self.tokens.append(("NEWLINE", value))
             elif kind == "SKIP":
+                continue
+            elif kind == ("SLC" or "MLC"):
                 continue
             elif kind == "MISMATCH":
                 error(f"Invalid character: {value}")
@@ -121,7 +130,10 @@ class Parser:
             self.current < len(self.tokens) and self.tokens[self.current][0] != "RPAREN"
         ):
             token = self.tokens[self.current]
-            if token[0] in {"STRING", "NUMBER"}:
+            if token[0] == "STRING":
+                args.append(token[1][1:-1])  # Strip surrounding quotes
+                self.current += 1
+            elif token[0] == "NUMBER":
                 args.append(token[1])
                 self.current += 1
             elif token[0] == "COMMA":
@@ -249,7 +261,7 @@ class Llama:
                     stderr=subprocess.DEVNULL,
                 )
             stdout, stderr = process.communicate()
-            print("Model created.")
+            info("Model created.")
 
             if process.returncode != 0:
                 if stderr:
