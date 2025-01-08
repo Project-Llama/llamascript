@@ -200,8 +200,11 @@ class Llama:
         self.model = model_name.strip('"')
         debug(f"Using model: {self.model}")
 
-    def prompt(self, prompt_text, _):
-        self.data = prompt_text
+    def prompt(self, prompt_text, attributes):
+        if "input" in attributes:
+            self.data = input(prompt_text)
+        else:
+            self.data = prompt_text
         debug(f"Prompt set to: {self.data}")
 
     def system_command(self, system_content, _):

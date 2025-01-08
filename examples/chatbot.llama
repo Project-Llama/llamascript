@@ -1,5 +1,6 @@
 use("piglatin") // Load the Piglatin module
-prompt("Why is the sky blue?") /* Ask a question */
+#[input(true)]
+prompt("Input: ") /* Ask a question */
 
 // The chatbot will respond in pig latin
 chat()

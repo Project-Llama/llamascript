@@ -7,7 +7,7 @@
 [![Upload to PyPi](https://github.com/Project-Llama/llamascript/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Project-Llama/llamascript/actions/workflows/python-publish.yml)
 [![CodeQL](https://github.com/Project-Llama/llamascript/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Project-Llama/llamascript/actions/workflows/github-code-scanning/codeql)
 
-[![VS Code Extension Downloads](https://img.shields.io/visual-studio-marketplace/d/WolfTheDev.llamascript?label=VS-Code%20Downloads)](https://marketplace.visualstudio.com/items?itemName=WolfTheDev.llamascript)
+[![VS Code Extension Downloads](https://img.shields.io/visual-studio-marketplace/d/zanderlewis.llamascript?label=VS-Code%20Downloads)](https://marketplace.visualstudio.com/items?itemName=zanderlewis.llamascript)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Project-Llama/llamascript?label=Commits)
 ![GitHub License](https://img.shields.io/github/license/Project-Llama/llamascript?label=License)
 
