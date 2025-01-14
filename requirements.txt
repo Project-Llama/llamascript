@@ -1,2 +1,2 @@
-ollama==0.4.5
+ollama==0.4.6
 colorama==0.4.6
