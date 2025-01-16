@@ -12,8 +12,15 @@ jobs:
         id: action_black
         with:
           black_args: "."
+      - name: Commit formatted code
+        if: steps.action_black.outputs.is_formatted == 'true' && github.event_name == 'pull_request'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am ":art: Format Python code with psf/black"
+          git push
       - name: Create Pull Request
-        if: steps.action_black.outputs.is_formatted == 'true'
+        if: steps.action_black.outputs.is_formatted == 'true' && github.event_name != 'pull_request'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
