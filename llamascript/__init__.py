@@ -207,7 +207,9 @@ class Llama:
             self.data = prompt_text
         debug(f"Prompt set to: {self.data}")
 
-    def system_command(self, system_content, _):
+    def system_command(self, system_content, attributes):
+        if "input" in attributes:
+            system_content = input(system_content)
         self.system = [{"role": "system", "content": system_content}]
         debug(f"System command set.")
 
